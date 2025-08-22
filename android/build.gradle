@@ -13,7 +13,7 @@
 
 buildscript {
     ext.kotlin_version = '1.9.25'
-    ext.kotlin_coroutines_version = '1.5.2'
+    ext.kotlin_coroutines_version = '1.7.3'
     ext.androidx_appcompat = '1.6.1'
     ext.android_material = '1.9.0'
     ext.androidx_preference = '1.2.1'

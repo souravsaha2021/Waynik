@@ -155,7 +155,7 @@ class AppTheme {
     ),
     // buttonColor: _lightCustomOutlineBtnColor,
     // Override the button color for the date picker dialog
-    dialogTheme: DialogTheme(
+    dialogTheme: DialogThemeData(
       contentTextStyle: TextStyle(
         decorationColor: Colors.blue,
       ),
@@ -227,7 +227,7 @@ class AppTheme {
         )
     ),
     // buttonColor: _darkCustomOutlineBtnColor,
-    dialogTheme: DialogTheme(
+    dialogTheme: DialogThemeData(
       contentTextStyle: TextStyle(
         decorationColor: Colors.blue,
       ),

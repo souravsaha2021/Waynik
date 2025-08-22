@@ -15,7 +15,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+/*import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';*/
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_new/mobikul/app_widgets/loader.dart';
 import 'package:test_new/mobikul/constants/app_constants.dart';
@@ -61,8 +61,8 @@ class _QrScreenState extends State<QrScreen> {
 
   Future<void> scanQR() async {
     String barcodeScanRes;
-    try {
-      barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
+    try { // here
+     /* barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
           '#ff6666', 'Cancel', true, ScanMode.QR);
       setState(() {
         print("========>${barcodeScanRes.toString()}");
@@ -70,13 +70,13 @@ class _QrScreenState extends State<QrScreen> {
         print("+++++=====${barCodedata}");
         qrScreenBloc?.add(QrScanSuccessEvent(barCodedata ?? ""));
       });
-      print(barcodeScanRes);
+      print(barcodeScanRes);*/
     } on PlatformException {
       barcodeScanRes = 'Getting an Error..';
     }
     if (!mounted) return;
     setState(() {
-      _scanBarcode = barcodeScanRes;
+    //  _scanBarcode = barcodeScanRes;// here
     });
   }
 

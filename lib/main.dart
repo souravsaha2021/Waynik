@@ -116,7 +116,8 @@ class MyApp extends StatelessWidget {
         final scale = mediaQueryData.textScaleFactor.clamp(1.0, 1.3);
         return MediaQuery(
           child: UpgradeAlert(
-            upgrader: Upgrader(dialogStyle: UpgradeDialogStyle.material),
+           // upgrader: Upgrader(dialogStyle: UpgradeDialogStyle.material),
+            dialogStyle: UpgradeDialogStyle.material,
             child: child,
           ),
           data: MediaQuery.of(context).copyWith(textScaleFactor: 1),
@@ -128,7 +129,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: UpgradeAlert(
-        upgrader: Upgrader(dialogStyle: UpgradeDialogStyle.material),
+        //upgrader: Upgrader(dialogStyle: UpgradeDialogStyle.material),
+          dialogStyle: UpgradeDialogStyle.material,
         child: const MobikulApp(),
       ),
     );
