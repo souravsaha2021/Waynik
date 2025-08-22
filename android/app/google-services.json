@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "763519495542",
+    "project_id": "waynik-by-safco",
+    "storage_bucket": "waynik-by-safco.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:763519495542:android:6de5c0098ac353a3465e57",
+        "android_client_info": {
+          "package_name": "com.waynik.android"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbhxrozcEcNKjx9Svv_or2Ixm2hQUe51A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

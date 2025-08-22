@@ -1,0 +1,69 @@
+/*
+ *
+ *  Webkul Software.
+ * @package Mobikul Application Code.
+ *  @Category Mobikul
+ *  @author Webkul <support@webkul.com>
+ *  @Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ *  @license https://store.webkul.com/license.html
+ *  @link https://store.webkul.com/license.html
+ *
+ * /
+ */
+
+buildscript {
+    ext.kotlin_version = '1.9.25'
+    ext.kotlin_coroutines_version = '1.5.2'
+    ext.androidx_appcompat = '1.6.1'
+    ext.android_material = '1.9.0'
+    ext.androidx_preference = '1.2.1'
+    ext.androidx_constraintlayout = '2.1.4'
+    ext.junit = '4.13.2'
+
+
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.2.2'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+//        classpath 'com.google.gms:google-services:4.3.10'
+        classpath 'com.google.gms:google-services:4.3.3'
+
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        maven { url 'https://jitpack.io' }
+        mavenCentral()
+    }
+}
+
+rootProject.buildDir = '../build'
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+}
+
+subprojects {
+    afterEvaluate { project ->
+        if (project.hasProperty('android')) {
+            project.android {
+                if (namespace == null) {
+                    namespace project.group
+                }
+            }
+        }
+    }
+}
+
+subprojects {
+    project.evaluationDependsOn(':app')
+}
+
+tasks.register("clean", Delete) {
+    delete rootProject.buildDir
+}
