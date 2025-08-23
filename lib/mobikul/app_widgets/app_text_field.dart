@@ -189,19 +189,23 @@ InputDecoration formFieldDecoration(
     // filled: true,
     suffixIcon: suffix,
     enabled: true,
-    border: OutlineInputBorder(
+    //------here-----------------
+    /*border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10),
         borderSide: BorderSide(
           color: Colors.grey,
-        )),
+        )),*/
     //
-    enabledBorder: OutlineInputBorder(
+    /*enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(10),
       borderSide: const BorderSide(color: Colors.grey),
-    ),
-    focusedBorder: OutlineInputBorder(
+    ),*/
+    /*focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10),
-        borderSide: BorderSide(color: Colors.grey, width: 1.5)),
+        borderSide: BorderSide(color: Colors.grey, width: 1.5)),*/
+
+    //------end-----------------
+
 
     //   disabledBorder: OutlineInputBorder(
     //       borderRadius: BorderRadius.circular(10),

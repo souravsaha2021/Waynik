@@ -315,9 +315,11 @@ class AppImages {
 
   //=============Images===============//
   static const appIcon = "assets/images/appIcon.png";
-  static const splashScreen = "assets/images/splash_screen.png";
+  static const splashScreen = "assets/images/splash_screen2.png";
   static const placeholder = "assets/images/placeholder.png";
   static const bannerImage = "assets/images/customer_banner_placeholder.png";
   static const threeDIcon = "assets/images/ic_3d_icon.png";
   static const statusIcon = "assets/images/ic_status.png";
+
+  static const signinSignupTopIcon = "assets/images/signin_signup_top.png";
 }

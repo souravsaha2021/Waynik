@@ -65,10 +65,10 @@ class _SignInSignUpScreenState extends State<SignInSignUpScreen> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       // appBar: commonAppBar(Utils.getStringValue(context, AppStringConstant.signInRegister), context),
-      appBar: commonAppBar(
+     /* appBar: commonAppBar(
           Utils.getStringValue(context, AppStringConstant.signInRegister),
           context,
-          isLeadingEnable: false),
+          isLeadingEnable: false),*/
 
       body: Padding(
         padding: const EdgeInsets.all(AppSizes.paddingMedium),
@@ -123,35 +123,59 @@ class _SignInSignUpScreenState extends State<SignInSignUpScreen> {
       children: <Widget>[
         Column(
           children: [
+            Expanded(child: Image.asset(
+              AppImages.signinSignupTopIcon,
+              fit: BoxFit.fill,
+            )),
             Expanded(
                 child: Center(
-              child: Text(
-                Utils.getStringValue(context, AppStringConstant.appName),
-                style: Theme.of(context).textTheme.displayLarge,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Text(
+                  Utils.getStringValue(context, AppStringConstant.get_grocery_wanik), // appName
+                  //style: Theme.of(context).textTheme.displayLarge,
+                  style: const TextStyle(
+                    fontFamily: "Montserrat",
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
               ),
             )),
             Padding(
               padding:
-                  const EdgeInsets.symmetric(vertical: AppSizes.spacingLarge),
+                  const EdgeInsets.symmetric(vertical: AppSizes.spacingTiny),
               child: Text(
                 Utils.getStringValue(context, AppStringConstant.signInRegister),
-                style: Theme.of(context)
+                /*style: Theme.of(context)
                     .textTheme
                     .titleSmall
-                    ?.copyWith(fontSize: AppSizes.paddingMedium),
+                    ?.copyWith(fontSize: AppSizes.paddingMedium),*/
+                style: const TextStyle(
+                  fontFamily: "Montserrat",
+                  fontSize: 13,
+                  fontWeight: FontWeight.normal,
+                  color: Colors.grey,
+                ),
               ),
             ),
-            appOutlinedButton(context, () {
+            SizedBox(height: 15,),
+            /*appOutlinedButton(context, () {
               signInSignUpBottomModalSheet(context, false, false);
-            },
+            },*/
+            appRoundcornerButton(context,(){
+               signInSignUpBottomModalSheet(context, false, false);
+                },
                 Utils.getStringValue(
-                    context, AppStringConstant.signInWithEmail)),
-            const SizedBox(height: AppSizes.paddingNormal),
-            appOutlinedButton(context, () {
+                    context, AppStringConstant.signInWithEmail), backgroundColor: Color(0xFF4285F4),),
+            const SizedBox(height: AppSizes.paddingMedium),
+
+            appRoundcornerButton(context, () {
               signInSignUpBottomModalSheet(context, true, false);
             },
                 Utils.getStringValue(
-                    context, AppStringConstant.createAnAccount)),
+                    context, AppStringConstant.createAnAccount),backgroundColor: Color(0xFF4A66AC)),
             const SizedBox(height: AppSizes.spacingLarge),
           ],
         ),

@@ -80,8 +80,16 @@ class _SplashScreenState extends State<SplashScreen> {
                     Navigator.of(context).pushNamedAndRemoveUntil(AppRoutes.walkThrough,(Route<dynamic> route) => false);
                   });
                 } else {
-                  WidgetsBinding.instance?.addPostFrameCallback((_) async{
+                 /* WidgetsBinding.instance?.addPostFrameCallback((_) async
+                      await Future.delayed(const Duration(seconds: 3));
                     Navigator.of(context).pushNamedAndRemoveUntil(AppRoutes.bottomTabBar,(Route<dynamic> route) => false);
+                  });*/
+                  WidgetsBinding.instance.addPostFrameCallback((_) async {
+                    await Future.delayed(const Duration(seconds: 3));
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                      AppRoutes.bottomTabBar,
+                          (Route<dynamic> route) => false,
+                    );
                   });
                 }
               } else if (state is WalkThroughDataError) {

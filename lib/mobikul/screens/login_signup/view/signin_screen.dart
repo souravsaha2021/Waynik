@@ -120,105 +120,219 @@ class _SignInScreenState extends State<SignInScreen> {
   Widget _buildContent() {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
-      appBar: commonAppBar(
+      /*appBar: commonAppBar(
           Utils.getStringValue(context, AppStringConstant.signInWithEmail),
           context,
           isLeadingEnable: true, onPressed: () {
         Navigator.pop(context);
-      }),
-      body: Padding(
-        padding: const EdgeInsets.all(AppSizes.paddingMedium),
-        child: Form(
-          key: _formKey,
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                const SizedBox(height: AppSizes.size16),
-                AppTextField(
-                    controller: _emailController,
-                    isRequired: true,
-                    isPassword: false,
-                    validationType: AppStringConstant.email,
-                    inputType: TextInputType.emailAddress,
-                    hintText: Utils.getStringValue(
-                        context, AppStringConstant.emailAddress)),
-                const SizedBox(height: AppSizes.size16),
-                AppTextField(
-                  controller: _passwordController,
-                  isRequired: true,
-                  isPassword: true,
-                  validationType: AppStringConstant.password,
-                  hintText:
-                      Utils.getStringValue(context, AppStringConstant.password),
-                ),
-                const SizedBox(height: AppSizes.size16 * 1.5),
+      }),*/
+      body: Container(
+        width: double.infinity, // full width
+        height: double.infinity, // full height
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/images/background.png"), // your image
+            fit: BoxFit.cover, // cover the whole screen
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 20,right: 20),
+          child: Form(
+            key: _formKey,
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  const SizedBox(height: AppSizes.size16),
 
-                /** Forgot password **/
-                GestureDetector(
-                  child: Text(
-                    Utils.getStringValue(
-                        context, AppStringConstant.forgotPassword),
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
-                  onTap: () {
-                    DialogHelper.forgotPasswordDialog(
-                      context,
-                      AppLocalizations.of(context),
-                      Utils.getStringValue(
-                          context, AppStringConstant.forgotPasswordTitle),
-                      Utils.getStringValue(
-                          context, AppStringConstant.forgotPasswordMessage),
-                      _emailController.text,
-                      onConfirm: (email) {
-                        bloc?.add(ForgotPasswordEvent(email));
-                        bloc?.emit(LoadingState());
-                      },
-                    );
-                  },
-                ),
-                const SizedBox(height: AppSizes.size16 * 1.5),
-                SizedBox(
-                  height: 48,
-                  child: ElevatedButton(
-                      onPressed: () {
-                        _validateForm();
-                      },
-                      child: Center(
-                        child: Text(
-                          Utils.getStringValue(
-                                  context, AppStringConstant.signIn)
-                              .toUpperCase(),
-                          style: Theme.of(context).textTheme.labelLarge,
+                Center(
+                  child: Container(
+                    margin: EdgeInsets.only(top: 20),
+                    //alignment: Alignment.topCenter,
+                      width: 120, // full width
+                      height: 120, // full height
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image:AssetImage(AppImages.appIcon), // your image
+                          fit: BoxFit.cover, // cover the whole screen
                         ),
-                      )),
+                      ),
+                  ),
                 ),
-                const SizedBox(height: AppSizes.size10),
+                  const SizedBox(height: AppSizes.size24),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                    child: Text(
+                      Utils.getStringValue(context, AppStringConstant.Loging), // appName
+                      //style: Theme.of(context).textTheme.displayLarge,
+                      style: const TextStyle(
+                        fontFamily: "Montserrat",
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: AppSizes.size6),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                    child: Text(
+                      Utils.getStringValue(context, AppStringConstant.emails_password), // appName
+                      //style: Theme.of(context).textTheme.displayLarge,
+                      style: const TextStyle(
+                        fontFamily: "Gilory",
+                        fontSize: 14,
+                        fontWeight: FontWeight.normal,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: AppSizes.size30),
+                  AppTextField(
+                      controller: _emailController,
+                      isRequired: true,
+                      isPassword: false,
+                      validationType: AppStringConstant.email,
+                      inputType: TextInputType.emailAddress,
+                      hintText: Utils.getStringValue(
+                          context, AppStringConstant.emailAddress)),
 
-                /** Create account **/
+                  const SizedBox(height: AppSizes.size16),
 
-                appOutlinedButton(context, () {
-                  Navigator.pop(context);
-                  signInSignUpBottomModalSheet(context, true, false);
-                },
-                    Utils.getStringValue(
-                            context, AppStringConstant.createAnAccount)
-                        .toUpperCase()),
-                const SizedBox(height: AppSizes.size16),
-                if ((appStoragePref.getFingerPrintUser() ?? "").isNotEmpty)
-                  Center(
-                    child: InkWell(
-                      child: Lottie.asset(AppImages.fingerPrintLottie,
-                          width: AppSizes.deviceWidth / 6,
-                          height: AppSizes.deviceWidth / 6,
-                          fit: BoxFit.fill,
-                          repeat: true),
+                  AppTextField(
+                    controller: _passwordController,
+                    isRequired: true,
+                    isPassword: true,
+                    validationType: AppStringConstant.password,
+                    hintText:
+                        Utils.getStringValue(context, AppStringConstant.password),
+                  ),
+                  const SizedBox(height: AppSizes.size16 * 1.5),
+
+                  /** Forgot password **/
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: GestureDetector(
+                      child: Text(
+                        Utils.getStringValue(
+                            context, AppStringConstant.forgotPassword),
+                       // style: Theme.of(context).textTheme.titleMedium,
+                        style: const TextStyle(
+                          fontFamily: "Gilory",
+                          fontSize: 13,
+                          fontWeight: FontWeight.normal,
+                          color: Colors.black54,
+                        ),
+                      ),
                       onTap: () {
-                        startAuthentication(false);
+                        DialogHelper.forgotPasswordDialog(
+                          context,
+                          AppLocalizations.of(context),
+                          Utils.getStringValue(
+                              context, AppStringConstant.forgotPasswordTitle),
+                          Utils.getStringValue(
+                              context, AppStringConstant.forgotPasswordMessage),
+                          _emailController.text,
+                          onConfirm: (email) {
+                            bloc?.add(ForgotPasswordEvent(email));
+                            bloc?.emit(LoadingState());
+                          },
+                        );
                       },
                     ),
-                  )
-              ],
+                  ),
+                  const SizedBox(height: AppSizes.size16 * 1.5),
+                  SizedBox(
+                    height: 55,
+                    child: ElevatedButton(
+                        onPressed: () {
+                          _validateForm();
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.orange, // button background
+                          foregroundColor: Colors.black,  // text/icon color (for contrast)
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12), // round corners
+                          ),
+                          padding: const EdgeInsets.symmetric(vertical: 14), // optional: bigger button
+                        ),
+
+                        child: Center(
+                          child: Text(
+                            Utils.getStringValue(
+                                    context, AppStringConstant.logIn)
+                                /*.toUpperCase()*/,
+                           // style: Theme.of(context).textTheme.labelLarge,
+                            style: const TextStyle(
+                              fontFamily: "Montserrat",
+                              fontSize: 15,
+                              fontWeight: FontWeight.normal,
+                              color: Colors.white,
+                            ),
+                          ),
+                        )),
+                  ),
+                  const SizedBox(height: AppSizes.size30),
+
+                  Center(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start, // second line left-aligned
+                      children: [
+                        Text(
+                          Utils.getStringValue(context, AppStringConstant.dont_have_accnt),
+                          style: const TextStyle(
+                            fontFamily: "Montserrat",
+                            fontSize: 14,
+                            fontWeight: FontWeight.normal,
+                            color: Colors.black,
+                          ),
+                        ),
+                        //const SizedBox(height: 4),
+                        GestureDetector(
+                          onTap: (){
+                            signInSignUpBottomModalSheet(context, true, false);
+                          },
+                          child: Text(
+                            Utils.getStringValue(context, AppStringConstant.singup),
+                            style: const TextStyle(
+                              fontFamily: "Montserrat",
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.green,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  /** Create account **/
+
+               /*   appOutlinedButton(context, () {
+                    Navigator.pop(context);
+                    signInSignUpBottomModalSheet(context, true, false);
+                  },
+                      Utils.getStringValue(
+                              context, AppStringConstant.createAnAccount)
+                          .toUpperCase()),*/
+
+                  const SizedBox(height: AppSizes.size16),
+                  if ((appStoragePref.getFingerPrintUser() ?? "").isNotEmpty)
+                    Center(
+                      child: InkWell(
+                        child: Lottie.asset(AppImages.fingerPrintLottie,
+                            width: AppSizes.deviceWidth / 6,
+                            height: AppSizes.deviceWidth / 6,
+                            fit: BoxFit.fill,
+                            repeat: true),
+                        onTap: () {
+                          startAuthentication(false);
+                        },
+                      ),
+                    )
+                ],
+              ),
             ),
           ),
         ),
