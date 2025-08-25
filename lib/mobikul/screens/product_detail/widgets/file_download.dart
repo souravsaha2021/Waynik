@@ -153,18 +153,45 @@ class DownloadFile {
   Future<void> initNotification(dynamic savePath) async {
 // initialise the plugin. app_icon needs to be a added as a drawable resource to the Android head project
     const AndroidInitializationSettings initializationSettingsAndroid = AndroidInitializationSettings('ic_status');
-    final IOSInitializationSettings initializationSettingsIOS =
-    IOSInitializationSettings();
+   /* final IOSInitializationSettings initializationSettingsIOS = IOSInitializationSettings();
     final MacOSInitializationSettings initializationSettingsMacOS =
     MacOSInitializationSettings();
     final InitializationSettings initializationSettings = InitializationSettings(
         android: initializationSettingsAndroid,
         iOS: initializationSettingsIOS,
-        macOS: initializationSettingsMacOS);
-    await flutterLocalNotificationsPlugin.initialize(initializationSettings,
+        macOS: initializationSettingsMacOS);*/
+
+    final DarwinInitializationSettings initializationSettingsDarwin =
+    DarwinInitializationSettings(
+      requestAlertPermission: true,
+      requestBadgePermission: true,
+      requestSoundPermission: true,
+      // onDidReceiveLocalNotification: (id, title?, body, payload) async {
+      //   // Handle iOS <= 9 when app is in foreground
+      // },
+    );
+
+    // Combine
+    final InitializationSettings initializationSettings = InitializationSettings(
+      android: initializationSettingsAndroid,
+      iOS: initializationSettingsDarwin,
+      macOS: initializationSettingsDarwin,
+    );
+
+    /*await flutterLocalNotificationsPlugin.initialize(initializationSettings,
         onSelectNotification: (String? payload) {
           if (payload != null) OpenFile.open(payload);
-        });
+        });*/
+
+    await flutterLocalNotificationsPlugin.initialize(
+      initializationSettings,
+      onDidReceiveNotificationResponse: (NotificationResponse response) async {
+        final String? payload = response.payload;
+        if (payload != null) {
+          await OpenFile.open(payload);
+        }
+      },
+    );
   }
 }
 

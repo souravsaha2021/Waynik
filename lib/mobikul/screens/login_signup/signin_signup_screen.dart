@@ -65,47 +65,42 @@ class _SignInSignUpScreenState extends State<SignInSignUpScreen> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       // appBar: commonAppBar(Utils.getStringValue(context, AppStringConstant.signInRegister), context),
-      appBar: commonAppBar(
+     /* appBar: commonAppBar(
           Utils.getStringValue(context, AppStringConstant.signInRegister),
           context,
-          isLeadingEnable: false),
+          isLeadingEnable: false),*/
 
-      body: Padding(
-        padding: const EdgeInsets.all(AppSizes.paddingMedium),
-        child: SafeArea(
-          child: BlocBuilder<SigninSignupScreenBloc, SigninSignupScreenState>(
-              builder: (event, state) {
-            if (state is SignupScreenFormSuccess) {
-              _loading = false;
-              var model = state.data;
-              WidgetsBinding.instance?.addPostFrameCallback((_) {
-                AlertMessage.showSuccess(model.message ?? "", context);
-                appStoragePref.setIsLoggedIn(model.success);
-                appStoragePref.setCustomerToken(model.customerToken);
-                appStoragePref.setQuoteId(0);
-                appStoragePref.setUserData(UserDataModel(
-                    cartCount: model.cartCount,
-                    name: model.customerName,
-                    email: model.customerEmail,
-                    bannerImage: model.bannerImage,
-                    profileImage: model.profileImage));
-                Navigator.pushNamedAndRemoveUntil(
-                    context, AppRoutes.bottomTabBar, (route) => false);
-              });
-                print("--->===>${state.data.customerToken}");
-            } else if (state is LoadingState) {
-              _loading = true;
-            } else if (state is SigninSignupScreenError) {
-              _loading = false;
-              WidgetsBinding.instance?.addPostFrameCallback((_) {
-                AlertMessage.showWarning(state.message ?? "", context);
-              });
-              bloc?.emit(SignupScreenEmpty());
-            }
-            return _buildUI();
-          }),
-        ),
-      ),
+      body: BlocBuilder<SigninSignupScreenBloc, SigninSignupScreenState>(
+          builder: (event, state) {
+        if (state is SignupScreenFormSuccess) {
+          _loading = false;
+          var model = state.data;
+          WidgetsBinding.instance?.addPostFrameCallback((_) {
+            AlertMessage.showSuccess(model.message ?? "", context);
+            appStoragePref.setIsLoggedIn(model.success);
+            appStoragePref.setCustomerToken(model.customerToken);
+            appStoragePref.setQuoteId(0);
+            appStoragePref.setUserData(UserDataModel(
+                cartCount: model.cartCount,
+                name: model.customerName,
+                email: model.customerEmail,
+                bannerImage: model.bannerImage,
+                profileImage: model.profileImage));
+            Navigator.pushNamedAndRemoveUntil(
+                context, AppRoutes.bottomTabBar, (route) => false);
+          });
+            print("--->===>${state.data.customerToken}");
+        } else if (state is LoadingState) {
+          _loading = true;
+        } else if (state is SigninSignupScreenError) {
+          _loading = false;
+          WidgetsBinding.instance?.addPostFrameCallback((_) {
+            AlertMessage.showWarning(state.message ?? "", context);
+          });
+          bloc?.emit(SignupScreenEmpty());
+        }
+        return _buildUI();
+      }),
     );
   }
 
@@ -124,35 +119,80 @@ class _SignInSignUpScreenState extends State<SignInSignUpScreen> {
         Column(
           children: [
             Expanded(
-                child: Center(
-              child: Text(
-                Utils.getStringValue(context, AppStringConstant.appName),
-                style: Theme.of(context).textTheme.displayLarge,
-              ),
+                flex: 1,
+                child: Image.asset(
+              AppImages.signinSignupTopIcon,
+                  fit: BoxFit.cover,
+                  width: double.infinity,
             )),
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: AppSizes.spacingLarge),
-              child: Text(
-                Utils.getStringValue(context, AppStringConstant.signInRegister),
-                style: Theme.of(context)
+            Expanded(
+                flex: 1,
+                child: Center(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                child: Column(
+                  children: [
+                    SizedBox(height: 15,),
+                    Text(
+                      Utils.getStringValue(context, AppStringConstant.get_grocery_wanik), // appName
+                      //style: Theme.of(context).textTheme.displayLarge,
+                      style: const TextStyle(
+                        fontFamily: "Montserrat",
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                    //SizedBox(height: 65,),
+                    Spacer(),
+                    Padding(
+                      padding:
+                      const EdgeInsets.symmetric(vertical: AppSizes.spacingTiny),
+                      child: Text(
+                        Utils.getStringValue(context, AppStringConstant.signInRegister),
+                        /*style: Theme.of(context)
                     .textTheme
                     .titleSmall
-                    ?.copyWith(fontSize: AppSizes.paddingMedium),
-              ),
-            ),
-            appOutlinedButton(context, () {
+                    ?.copyWith(fontSize: AppSizes.paddingMedium),*/
+                        style: const TextStyle(
+                          fontFamily: "Montserrat",
+                          fontSize: 13,
+                          fontWeight: FontWeight.normal,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 15,),
+                    /*appOutlinedButton(context, () {
               signInSignUpBottomModalSheet(context, false, false);
-            },
-                Utils.getStringValue(
-                    context, AppStringConstant.signInWithEmail)),
-            const SizedBox(height: AppSizes.paddingNormal),
-            appOutlinedButton(context, () {
-              signInSignUpBottomModalSheet(context, true, false);
-            },
-                Utils.getStringValue(
-                    context, AppStringConstant.createAnAccount)),
-            const SizedBox(height: AppSizes.spacingLarge),
+            },*/
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8,right: 8,bottom: 0),
+                      child: Column(
+                        children: [
+                          appRoundcornerButton(context,(){
+                            signInSignUpBottomModalSheet(context, false, false);
+                          },
+                            Utils.getStringValue(
+                                context, AppStringConstant.signInWithEmail), backgroundColor: Color(0xFF4285F4),),
+
+                          const SizedBox(height: AppSizes.paddingMedium),
+
+                          appRoundcornerButton(context, () {
+                            signInSignUpBottomModalSheet(context, true, false);
+                          },
+                              Utils.getStringValue(
+                                  context, AppStringConstant.createAnAccount),backgroundColor: Color(0xFF4A66AC)),
+                        ],
+                      ),
+                    ),
+
+                    const SizedBox(height: AppSizes.spacingMax),
+                  ],
+                ),
+              ),
+            )),
+
           ],
         ),
         Visibility(

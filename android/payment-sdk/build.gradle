@@ -4,6 +4,7 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'maven-publish'
 apply plugin: 'kotlin-parcelize'
 //apply plugin: 'org.jetbrains.kotlin.plugin.compose'
+apply plugin:  "org.jetbrains.kotlin.plugin.compose"
 
 
 

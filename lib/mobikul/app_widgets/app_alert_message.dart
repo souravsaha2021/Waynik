@@ -135,7 +135,7 @@ class SlideInToastMessageAnimation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final tween = MultiTween<AnimationType>()
+    /*final tween = MultiTween<AnimationType>()
       ..add(
         AnimationType.translateX,
         Tween(begin: -100.0, end: 0.0),
@@ -167,9 +167,26 @@ class SlideInToastMessageAnimation extends StatelessWidget {
         AnimationType.opacity,
         Tween(begin: 1.0, end: 0.0),
         const Duration(milliseconds: 500),
-      );
+      );*/
 
-    return PlayAnimation<MultiTweenValues<AnimationType>>(
+    final tween = MovieTween()
+    // translateX animation
+      ..scene(duration: const Duration(milliseconds: 250), curve: Curves.easeOut)
+          .tween(AnimationType.translateX, Tween(begin: -100.0, end: 0.0))
+      ..scene(duration: const Duration(milliseconds: 1250))
+          .tween(AnimationType.translateX, ConstantTween(0.0))
+      ..scene(duration: const Duration(milliseconds: 250), curve: Curves.easeIn)
+          .tween(AnimationType.translateX, Tween(begin: 0.0, end: -100.0))
+
+    // opacity animation
+      ..scene(duration: const Duration(milliseconds: 500))
+          .tween(AnimationType.opacity, Tween(begin: 0.0, end: 1.0))
+      ..scene(duration: const Duration(seconds: 1))
+          .tween(AnimationType.opacity, ConstantTween(1.0))
+      ..scene(duration: const Duration(milliseconds: 500))
+          .tween(AnimationType.opacity, Tween(begin: 1.0, end: 0.0));
+
+   /* return PlayAnimation<MultiTweenValues<AnimationType>>(
         duration: tween.duration,
         tween: tween,
         child: child,
@@ -180,7 +197,23 @@ class SlideInToastMessageAnimation extends StatelessWidget {
                 offset: Offset(0, animation.get(AnimationType.translateX)!),
                 child: child),
           );
-        });
+        });*/
+
+    return PlayAnimationBuilder<Movie>(
+      tween: tween,
+      duration: tween.duration,
+      child: child,
+      builder: (context, value, child) {
+        return Opacity(
+          opacity: value.get(AnimationType.opacity),
+          child: Transform.translate(
+            offset: Offset(value.get(AnimationType.translateX), 0),
+            child: child,
+          ),
+        );
+      },
+    );
+
   }
 }
 

@@ -28,6 +28,16 @@ class AppStringConstant {
   static const String signInRegister = "signInRegister";
   static const String signInWithEmail = "signInWithEmail";
   static const String createAnAccount = "createAnAccount";
+
+  static const String get_grocery_wanik = "Get your groceries with waynik";
+  static const String Loging = "Loging";
+  static const String emails_password = "Enter your emails and password";
+  static const String logIn = "Log In";
+  static const String dont_have_accnt = "Don’t have an account?";
+  static const String singup = "Singup";
+
+
+
   static const String or = "or";
   static const String signIn = "signIn";
   static const String account="account";

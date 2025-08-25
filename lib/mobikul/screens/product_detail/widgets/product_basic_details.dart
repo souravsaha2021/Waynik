@@ -14,7 +14,8 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:flutter_share/flutter_share.dart';
+/*import 'package:flutter_share/flutter_share.dart';*/
+import 'package:share_plus/share_plus.dart';
 import 'package:test_new/mobikul/configuration/mobikul_theme.dart';
 import 'package:test_new/mobikul/constants/app_string_constant.dart';
 import 'package:test_new/mobikul/helper/app_storage_pref.dart';
@@ -378,11 +379,16 @@ class ProductPageBasicDetailsViewState
                 flex: 1,
                 child: OutlinedButton(
                   onPressed: () async {
-                    await FlutterShare.share(
+                   /* await FlutterShare.share(
                         title: widget.product?.name ?? '',
                         text: '',
                         linkUrl: widget.product?.productUrl,
-                        chooserTitle: '');
+                        chooserTitle: '');*/
+
+                    await Share.share(
+                      widget.product?.productUrl ?? '',
+                      subject: widget.product?.name ?? '',
+                    );
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,

@@ -40,3 +40,46 @@ Widget appOutlinedButton(
     ),
   );
 }
+
+Widget appRoundcornerButton(BuildContext context,
+    VoidCallback onPressed,
+    String text, {
+      double? width,
+      double? height,
+      Color? textColor,
+      Color? backgroundColor,
+      double borderRadius = 10,
+    }){
+  return SizedBox(
+    width: double.infinity, // full-width button
+    height: 55, // button height
+    child: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 14.0),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: backgroundColor ?? const Color(0xFF4285F4),//const Color(0xFF4285F4), // Google Blue
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(18), // rounded corners
+          ),
+          elevation: 0, // flat design
+        ),
+        onPressed: onPressed,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const SizedBox(width: 12),
+             Text(
+              text,
+              style: TextStyle(
+                color: Colors.white,
+                fontFamily: "Montserrat",
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
+}

@@ -11,7 +11,7 @@
  * /
  */
 
-import 'dart:convert';
+/*import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:test_new/mobikul/constants/app_constants.dart';
@@ -32,7 +32,7 @@ class _ProductsWebViewState extends State<ProductsWebView> {
   _ProductsWebViewState(this.description);
 
   _loadHtml(){
-    _webViewController!.loadUrl(Uri.dataFromString("<h1>$description</h1>", mimeType: 'text/html',encoding: Encoding.getByName('utf-8')).toString());
+    _webViewController!.loadRequest(Uri.dataFromString("<h1>$description</h1>", mimeType: 'text/html',encoding: Encoding.getByName('utf-8')));
 
   }
 
@@ -53,4 +53,43 @@ class _ProductsWebViewState extends State<ProductsWebView> {
       ),
     );
   }
+}*/
+
+
+import 'package:flutter/material.dart';
+import 'package:test_new/mobikul/constants/app_constants.dart';
+import 'package:webview_flutter/webview_flutter.dart';
+
+class ProductsWebView extends StatefulWidget {
+  final String description;
+
+  const ProductsWebView(this.description, {Key? key}) : super(key: key);
+
+  @override
+  _ProductsWebViewState createState() => _ProductsWebViewState();
 }
+
+class _ProductsWebViewState extends State<ProductsWebView> {
+  late final WebViewController _webViewController;
+
+  @override
+  void initState() {
+    super.initState();
+    _webViewController = WebViewController()
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..loadHtmlString("<h1>${widget.description}</h1>");
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Theme.of(context).colorScheme.background,
+      width: MediaQuery.of(context).size.width,
+      padding: const EdgeInsets.all(AppSizes.size8),
+      child: WebViewWidget(
+        controller: _webViewController,
+      ),
+    );
+  }
+}
+

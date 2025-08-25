@@ -11,7 +11,7 @@
  * /
  */
 
-def localProperties = new Properties()
+/*def localProperties = new Properties()
 def localPropertiesFile = rootProject.file('local.properties')
 if (localPropertiesFile.exists()) {
     localPropertiesFile.withReader('UTF-8') { reader ->
@@ -138,4 +138,132 @@ dependencies {
     implementation project(':payment-sdk')
     implementation project(':payment-sdk-core')
     implementation project(':payment-sdk-samsungpay')
+}*/
+
+
+plugins {
+    id("com.android.application")
+    id("kotlin-android")
+    id("kotlin-kapt")
+    id "com.google.gms.google-services"
+    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
+    id("dev.flutter.flutter-gradle-plugin")
+    id "org.jetbrains.kotlin.plugin.compose"
+
+}
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file("key.properties")
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
+
+android {
+    namespace "com.example.test_new"
+    compileSdk 35
+    ndkVersion "27.0.12077973"
+
+    compileOptions {
+        coreLibraryDesugaringEnabled true
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    buildFeatures {
+        buildConfig true
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion "1.5.15" // match your Compose BOM
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    sourceSets {
+        main.java.srcDirs += "src/main/kotlin"
+    }
+
+    defaultConfig {
+        applicationId "com.waynik.android"
+        minSdk 23
+        targetSdk 35
+        versionCode project.hasProperty("flutter.versionCode") ? project.getProperty("flutter.versionCode").toInteger() : 1
+        versionName project.hasProperty("flutter.versionName") ? project.getProperty("flutter.versionName") : "1.0"
+        multiDexEnabled true
+    }
+
+    buildFeatures {
+        dataBinding true
+        compose true
+    }
+
+    buildTypes {
+        debug {
+            debuggable true
+            minifyEnabled false
+        }
+
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+        }
+    }
+
+    lint {
+        checkReleaseBuilds false
+    }
+
+
+}
+flutter {
+    source = "../.."
+}
+dependencies {
+    // Firebase BOM
+    implementation platform("com.google.firebase:firebase-bom:33.7.0")
+
+    // Facebook SDK
+    implementation "com.facebook.android:facebook-android-sdk:8.2.0"
+
+    // ARCore + Sceneform
+    implementation "com.google.ar.sceneform.ux:sceneform-ux:1.17.1"
+    implementation "com.google.ar.sceneform:assets:1.17.1"
+    implementation "com.google.ar:core:1.30.0"
+
+    // AndroidX
+    implementation "androidx.window:window:1.0.0"
+    implementation "androidx.recyclerview:recyclerview:1.2.1"
+    implementation "androidx.appcompat:appcompat:1.7.0"
+    implementation "com.google.android.material:material:1.5.0"
+
+    // Google Play services
+    implementation "com.google.android.play:review:2.0.1"
+    implementation "com.google.android.play:app-update:2.1.0"
+    implementation "com.google.android.play:app-update-ktx:2.1.0"
+
+    // ML Kit
+    api "com.google.android.gms:play-services-mlkit-text-recognition:18.0.0"
+    api "com.google.mlkit:image-labeling:17.0.7"
+    api "com.google.mlkit:image-labeling-custom:17.0.1"
+
+    // Glide
+    implementation "com.github.bumptech.glide:glide:4.12.0"
+
+    // Core library desugaring
+    coreLibraryDesugaring "com.android.tools:desugar_jdk_libs:2.1.4" //1.1.9
+
+    //compose-bom
+    implementation platform("androidx.compose:compose-bom:2025.01.00")
+    implementation "androidx.compose.ui:ui"
+    implementation "androidx.compose.material3:material3"
+    implementation "androidx.compose.ui:ui-tooling-preview"
+    debugImplementation "androidx.compose.ui:ui-tooling"
+
+    // Local modules
+    implementation project(":payment-sdk")
+    implementation project(":payment-sdk-core")
+    implementation project(":payment-sdk-samsungpay")
+
+    implementation "commons-io:commons-io:2.11.0"
 }
